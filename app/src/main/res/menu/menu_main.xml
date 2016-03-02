@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <group android:id="@+id/action_menu_main_group"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/new_file_item"
+            android:title="@string/open_new_file_menu_item" />
+        <item
+            android:id="@+id/video_info_item"
+            android:title="@string/video_info_menu_item" />
+        <item
+            android:id="@+id/video_frame_item"
+            android:title="@string/video_frame_info_menu_item" />
+    </group>
+</menu>

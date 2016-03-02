@@ -1,0 +1,267 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_video_seeker_frame_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context=".VideoSeekerFragment">
+
+
+        <LinearLayout
+            android:id="@+id/main_text_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal"
+            android:weightSum="100">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="50"
+                android:gravity="start"
+                android:layout_gravity="left"
+                android:measureWithLargestChild="false">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/ElementLayout" >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Video Width"
+                        android:theme="@style/InfoText.Label" />
+
+                    <TextView
+                        android:id="@+id/video_width"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/InfoText"
+                        android:text="0"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/ElementLayout">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Frame Index"
+                        android:theme="@style/InfoText.Label" />
+
+                    <TextView
+                        android:id="@+id/frame_index"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/InfoText"
+                        android:text="0"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/ElementLayout">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Packet Position"
+                        android:theme="@style/InfoText.Label" />
+
+                    <TextView
+                        android:id="@+id/packet_position"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/InfoText"
+                        android:text="0"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/ElementLayout">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="PTS"
+                        android:theme="@style/InfoText.Label" />
+
+                    <TextView
+                        android:id="@+id/pts"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/InfoText"
+                        android:text="0"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/ElementLayout">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Interlaced"
+                        android:theme="@style/InfoText.Label" />
+
+                    <TextView
+                        android:id="@+id/interlaced"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/InfoText"
+                        android:text="0"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/ElementLayout">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Quality"
+                        android:theme="@style/InfoText.Label" />
+
+                    <TextView
+                        android:id="@+id/quality"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/InfoText"
+                        android:text="0"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/ElementLayout">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Frame Type"
+                        android:theme="@style/InfoText.Label" />
+
+                    <TextView
+                        android:id="@+id/frame_type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/InfoText"
+                        android:text="Unknown"/>
+                </LinearLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="end"
+                android:layout_weight="50"
+                android:layout_gravity="right">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/ElementLayout">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Video Height"
+                        android:theme="@style/InfoText.Label" />
+
+                    <TextView
+                        android:id="@+id/video_height"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/InfoText"
+                        android:text="0"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/ElementLayout">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Display Picture #"
+                        android:theme="@style/InfoText.Label" />
+
+                    <TextView
+                        android:id="@+id/display_picture_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/InfoText"
+                        android:text="0"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/ElementLayout">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Timestamp"
+                        android:theme="@style/InfoText.Label" />
+
+                    <TextView
+                        android:id="@+id/timestamp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/InfoText"
+                        android:text="0"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/ElementLayout">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="DTS"
+                        android:theme="@style/InfoText.Label" />
+
+                    <TextView
+                        android:id="@+id/dts"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/InfoText"
+                        android:text="0"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/ElementLayout">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Keyframe"
+                        android:theme="@style/InfoText.Label" />
+
+                    <TextView
+                        android:id="@+id/keyframe"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/InfoText"
+                        android:text="0"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/ElementLayout">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Frame Duration"
+                        android:theme="@style/InfoText.Label" />
+
+                    <TextView
+                        android:id="@+id/duration"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/InfoText"
+                        android:text="0"/>
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/video_seek_bar"
+            android:layout_width="fill_parent"
+            android:layout_height="136dp"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginBottom="10dp" />
+
+
+</FrameLayout>

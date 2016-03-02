@@ -1,0 +1,135 @@
+apply plugin: 'com.android.model.application'
+
+model {
+
+    android {
+        compileSdkVersion = 23
+        buildToolsVersion = "23.0.2"
+
+
+        defaultConfig.with {
+
+            applicationId = "com.mkehoe.videoanalyzer"
+            minSdkVersion.apiLevel = 17
+            targetSdkVersion.apiLevel = 23
+            versionCode = 1
+            versionName = "1.0"
+
+
+
+            buildConfigFields.with {
+                create() {
+                    type = "int"
+                    name = "VALUE"
+                    value = "1"
+                }
+            }
+        }
+
+    }
+    android.buildTypes {
+        release {
+            minifyEnabled = false
+            proguardFiles.add(file('proguard-rules.pro'))
+        }
+    }
+    android.ndk {
+        moduleName = "ffmpegjni"
+        toolchain = "gcc"
+        toolchainVersion = "4.9"
+        cppFlags.add("-UNDEBUG")
+        //CFlags.add("-I" + file("src/main/jni").absolutePath)
+        cppFlags.add("-I" + file("src/main/jni").absolutePath)
+        cppFlags.add("-frtti")
+        cppFlags.add("-fexceptions")
+
+        // for native multimedia
+        //ldLibs.addAll(["libavcodec-57.so"])
+        File curDir = file('./')
+        curDir = file(curDir.absolutePath)
+        String libsDir = curDir.absolutePath + "\\src\\main\\jniLibs\\armeabi-v7a\\"
+        ldFlags.add("-L" + libsDir)
+        ldLibs.add(libsDir + "libavcodec-57.so")
+        ldLibs.add(libsDir + "libavfilter-6.so")
+        ldLibs.add(libsDir + "libavformat-57.so")
+        ldLibs.add(libsDir + "libavutil-55.so")
+        ldLibs.add(libsDir + "libswscale-4.so")
+        ldLibs.add(libsDir + "libswresample-2.so")
+        //ldFlags.add()
+
+        // for logging
+        ldLibs.add("log")
+        // for native windows
+        ldLibs.add("android")
+        ldLibs.add("jnigraphics")
+
+
+        abiFilters.addAll(["armeabi", "armeabi-v7a"/*, "x86"*/])
+
+        stl = "gnustl_static"
+    }
+    android.productFlavors {
+        create("arm") {
+            ndk.abiFilters.add("armeabi")
+        }
+        create("arm7") {
+            ndk.abiFilters.add("armeabi-v7a")
+        }
+        /*create("arm8") {
+            ndk.abiFilters.add("arm64-v8a")
+        }*/
+        /*create("x86-32") {
+            ndk.abiFilters.add("x86")
+        }*/
+        // for detailed abiFilter descriptions, refer to "Supported ABIs" @
+        // https://developer.android.com/ndk/guides/abis.html#sa
+        // build one including all productFlavors
+        // build one including all productFlavors
+        create("fat")
+    }
+    android.sources.main {
+        jniLibs {
+            dependencies {
+                library file("src/main/jniLibs/armeabi-v7a/libavcodec-57.so") abi "armeabi-v7a"
+                library file("src/main/jniLibs/armeabi-v7a/libavfilter-6.so") abi "armeabi-v7a"
+                library file("src/main/jniLibs/armeabi-v7a/libavformat-57.so") abi "armeabi-v7a"
+                library file("src/main/jniLibs/armeabi-v7a/libavutil-55.so") abi "armeabi-v7a"
+                library file("src/main/jniLibs/armeabi-v7a/libswscale-4.so") abi "armeabi-v7a"
+                library file("src/main/jniLibs/armeabi-v7a/libswresample-2.so") abi "armeabi-v7a"
+                library file("src/main/jniLibs/armeabi/libavcodec-57.so") abi "armeabi"
+                library file("src/main/jniLibs/armeabi/libavfilter-6.so") abi "armeabi"
+                library file("src/main/jniLibs/armeabi/libavformat-57.so") abi "armeabi"
+                library file("src/main/jniLibs/armeabi/libavutil-55.so") abi "armeabi"
+                library file("src/main/jniLibs/armeabi/libswscale-4.so") abi "armeabi"
+                library file("src/main/jniLibs/armeabi/libswresample-2.so") abi "armeabi"
+            }
+            /*dependencies {
+                library "libavcodec-57"
+                library "libavfilter-6"
+                library "libavformat-57"
+                library "libavutil-55"
+                library "libswscale-4"
+                library "libswresample-2"
+            }
+            */
+        }
+        jni {
+            source {
+                srcDirs.add('src/main/jni')
+            }
+        }
+    }
+
+
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:23.1.1'
+    compile 'com.android.support:design:23.1.1'
+    compile 'com.android.support:support-v4:23.2.0'
+    compile 'com.google.android.gms:play-services:8.4.0'
+}
+
+
