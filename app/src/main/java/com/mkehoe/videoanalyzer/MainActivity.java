@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements FileChooserFragme
                                                                 NavigationView.OnNavigationItemSelectedListener {
     static String CLASS_TAG = "com.mkehoe.videoanalyzer.MainActivity";
 
-    private static int PRELOAD_THUMB_COUNT = 100;
+    private static int PRELOAD_THUMB_COUNT = -1;
 
     private FileChooserFragment mFileChooser = null;
     private VideoSeekerFragment mVideoSeekerFragment = null;
@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements FileChooserFragme
 
     // Jni methods
     public native MediaInfo OpenFile(String url);
-    public native int GetThumbnailFrames(Object surface, int width, int height, int frameCount);
+    public native int GetThumbnailFrames(int width, int height, int frameCount);
     public native boolean CloseFile();
 
     /** Load jni .so on initialization */
@@ -217,14 +217,13 @@ public class MainActivity extends AppCompatActivity implements FileChooserFragme
             mMenu.findItem(R.id.video_info_item).setEnabled(false);
             mMenu.findItem(R.id.video_frame_item).setEnabled(false);
 
-            m_BitmapArr = new Bitmap[PRELOAD_THUMB_COUNT];
+            /*m_BitmapArr = new Bitmap[PRELOAD_THUMB_COUNT];
 
             for(int i = 0; i < m_BitmapArr.length; i++) {
                 m_BitmapArr[i] = Bitmap.createBitmap(mediaInfo.getRecommendedThumbWidth(), mediaInfo.getRecommendedThumbHeight(), Bitmap.Config.ARGB_8888);
-            }
+            }*/
 
-            GetThumbnailFrames(m_BitmapArr,
-                    mediaInfo.getRecommendedThumbWidth(),
+            GetThumbnailFrames( mediaInfo.getRecommendedThumbWidth(),
                     mediaInfo.getRecommendedThumbHeight(),
                     PRELOAD_THUMB_COUNT);
         }

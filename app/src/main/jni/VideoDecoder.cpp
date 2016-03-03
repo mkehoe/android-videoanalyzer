@@ -289,7 +289,7 @@ void* VideoDecoder::ProcessFrames( void * context){
                 (_this->m_ProcessFramesArgs.callback)(frameInfo);
                 delete frameInfo;
                 readFrameCount++;
-                if( readFrameCount >= _this->m_ProcessFramesArgs.frameCount) {
+                if( (_this->m_ProcessFramesArgs.frameCount > 0) && (readFrameCount >= _this->m_ProcessFramesArgs.frameCount)) {
                     break;
                 }
             }
@@ -305,15 +305,18 @@ void* VideoDecoder::ProcessFrames( void * context){
     av_frame_free(&pFrame);
     //return i;
 
+    ///notify the listener to cleanup
+    (_this->m_ProcessFramesArgs.cleanupCallback)();
+
 
 }
 
-void VideoDecoder::GetFrames(void** imageBuffers, int width, int height, int frameCount, FrameProcessingCallback callback) {
+void VideoDecoder::GetFrames(int width, int height, int frameCount, FrameProcessingCallback callback, ProcessingCleanupCallback cleanupCallback) {
     m_ProcessFramesArgs.height =height;
     m_ProcessFramesArgs.width = width;
-    m_ProcessFramesArgs.imageBuffers = imageBuffers;
     m_ProcessFramesArgs.frameCount = frameCount;
     m_ProcessFramesArgs.callback = callback;
+    m_ProcessFramesArgs.cleanupCallback = cleanupCallback;
     pthread_create(&processingThread, NULL, &VideoDecoder::ProcessFrames, this );
 
 }

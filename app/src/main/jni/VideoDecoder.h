@@ -55,13 +55,14 @@ struct frame_info {
 };
 
 typedef void (*FrameProcessingCallback)(frame_info*);
+typedef void (*ProcessingCleanupCallback)();
 
 struct processing_thread_args {
-    void** imageBuffers;
     int width;
     int height;
     int frameCount;
     FrameProcessingCallback callback;
+    ProcessingCleanupCallback cleanupCallback;
 };
 
 const int THUMB_SIZE_WIDTH = 220;
@@ -72,7 +73,7 @@ public:
     ~VideoDecoder();
     media_info*  OpenFile(const char *file_url);
     void CloseFile();
-    void GetFrames(void** imageBuffers, int width, int height, int frameCount, FrameProcessingCallback callback);
+    void GetFrames( int width, int height, int frameCount, FrameProcessingCallback callback, ProcessingCleanupCallback cleanupCallback);
 
 private:
     static void* ProcessFrames( void * context);
